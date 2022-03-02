@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    <article class="flex-shrink-0 container-fluid px-4 pb-3 bg-light">
+        <form action="" method="POST">
+            <div class="mb-3">
+                <label class="form-label pt-4">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Title" maxlength="30">
+                <label class="form-label pt-3">Content</label>
+                <textarea class="form-control mb-3" name="content" rows="8" placeholder="Content" maxlength="2000"></textarea>
+                {% csrf_token %}
+                <input class="button btn btn-primary bg-gradient" type="submit" value="save"/>
+            </div>
+        </form>
+    </article>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+        <div id="error" class="text-center">404</div>
+        <p id="not-found" class="text-center">OOPS! WE CAN'T FIND THAT PAGE!</p>
+        <p id="third-line-error" class="text-center">Either something went wrong or the page doesn't exist anymore.</p>
+        <div class="container">
+                <div class="row">
+                        <div class="col text-center">
+                                <a href="{% url 'index' %}" class="button">Back to home</a>
+                        </div>
+                </div>
+        </div>
+{% endblock %}

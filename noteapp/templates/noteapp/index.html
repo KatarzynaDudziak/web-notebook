@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+    <article class="container-fluid pb-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 pt-4">
+        {% for note in notes %}
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-header bg-primary p-1 bg-opacity-10">
+                        <a href="{% url 'note' note.id%}" id="note-title">{{note.title}}</a>
+                    </div>
+                    <div class="card-body h-50">
+                        <div class="card-text"><pre><p id="text-note">{{note.content|truncatechars:150}}{% if note.content|length > 150 %}<a href="{% url 'note' note.id%}" id="more">read more</a>{% endif %}</p></pre></div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center bg-primary p-2 text-dark bg-opacity-10">
+                        <a href="{% url 'edit' note.id  %}" class="button card-link btn btn-sm p-2 bg-gradient">Edit</a>
+                        <form method="POST" action="{% url 'delete' %}"> 
+                            {% csrf_token %}
+                            <input class ="del" type="submit" value="delete">
+                            <input type="hidden" value="{{ note.id }}" name="id">
+                        </form>
+                        <small class="update text-muted p-2">Last updated:<time class="data ms-auto p-1 bd-highlight align-self-center">{{note.date}}</time>
+                        </small>
+                    </div>
+                </div>
+            </div>
+    {% empty %}
+    <div class="container d-flex h-100">
+        <div class="row justify-content-center align-self-center">
+            <h1>No notes to display</h1>
+        </div>
+    </div>
+    {% endfor %}
+        </div>
+        <script>
+            var buttons = document.getElementsByClassName('del');
+            
+            Array.prototype.forEach.call(buttons, element => { 
+                element.addEventListener('click', function (event) {
+                    result = window.confirm('Do you really want to delete it?');
+                    console.log(result);
+                    if (result == false) {
+                        event.preventDefault();
+                    }
+                });      
+            });
+        </script>
+    </article>
+{% endblock %}

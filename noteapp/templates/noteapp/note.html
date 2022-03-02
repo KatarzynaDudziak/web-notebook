@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+    <article class="flex-shrink-0 container-fluid px-4 pb-3 bg-light">
+        <div class="row g-4 pt-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header bg-primary p-2 text-dark bg-opacity-10">
+                        <h3>{{note.title}}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text"><pre><p id="text-note">{{note.content}}</p></pre></div>
+                    </div>
+                    <div class="card-footer d-flex align-items-center">
+                        <a href="{% url 'edit' note.id  %}" class="button card-link btn btn-primary btn-sm p-2 bg-gradient">Edit</a>
+                        <button id=delBtn type="submit" name="send" value="delete"> delete </button>
+                        <span>author: {{note.author}}</span>
+                        <h6 class="data ms-auto p-2 bd-highlight align-self-center">{{note.date}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}
